@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Racing+Sans+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* ==========================
+    RESET / PAGE LAYOUT 
+=========================== */
 * {
 	margin: 0;
 	padding: 0;
@@ -5,11 +10,26 @@
 }
 
 body {
-	font-family: arial, sans-serif;
+	font-family: "roboto";
 	background-color: lightgray;
 	text-align: center;
 	color: white;
 }
+
+body::before {
+	content: "";
+	background:
+		linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.642)),
+		url(https://i.postimg.cc/Gp5GZdy1/1750720263_jpg.avif) center/cover
+			no-repeat;
+	z-index: -1;
+	position: fixed;
+	inset: 0;
+}
+
+/* ==========================
+    SELECTED OPTIONS 
+=========================== */
 
 .hidden {
 	display: none;
@@ -17,12 +37,14 @@ body {
 
 .correct {
 	background-color: rgb(74, 191, 74);
+	font-weight: 600;
 	color: white;
 }
 
 .incorrect {
-	background-color: rgb(226, 40, 40);
-	color: white;
+	background-color: rgb(243, 43, 43);
+	color: black;
+	font-style: italic;
 }
 
 /* ==========================
@@ -30,56 +52,69 @@ body {
 =========================== */
 
 #quiz-container,
-#score-container {
-	background-color: rgb(137, 8, 8);
+#score-container,
+#start-container {
+	background-color: rgba(137, 8, 8, 0.841);
 	width: 50%;
 	margin: 80px auto;
 	padding: 30px;
-	border: 1.2px solid black;
+	border: none;
 	border-radius: 10px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 10px rgba(255, 255, 255, 0.5);
 }
 
-#quiz-container {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	align-items: center;
+#quiz-container h1,
+#start-container h1 {
+	font-size: 2.5em;
+	font-family: "racing sans one";
 }
 
-#quiz-container h1 {
-	font-size: 2rem;
+span {
+	font-size: 0.8em;
+	font-family: arial;
+	font-weight: bold;
+	font-style: italic;
+} /* "quiz" */
+
+#start-container p {
+	margin-top: 30px;
+	font-size: 1.1em;
+	font-weight: 700;
+	letter-spacing: 0.5px;
 }
 
-/* <==== Question ====> */
+/* <==== QUESTION ====> */
 #progress {
 	margin-top: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 35px;
 	font-family: monospace;
 }
 
 #question-container {
 	margin: 20px auto;
-	font-family: sans-serif;
-	font-size: 1.4em;
+	font-size: 1.2em;
 	font-weight: bold;
-	padding: 0 20px;
+	padding: 0 10px;
+	letter-spacing: 0.2px;
 }
 
-/* <==== Score ====> */
+/* <==== SCORE ====> */
 #score-container h2 {
 	margin-bottom: 30px;
+	font-family: "racing sans one";
+	font-size: 2.5em;
+} /* "your score" */
+
+#message {
+	margin-top: 45px;
+	font-weight: 500;
 	font-size: 1.8em;
 }
 
-#message {
-	margin-top: 20px;
-}
-
-#score,
-#message {
-	font-size: 1.2em;
-	font-weight: 2;
+#score {
+	font-style: italic;
+	font-weight: 700;
+	font-size: 1.4em;
 }
 
 /* ==========================
@@ -90,19 +125,30 @@ button {
 	padding: 8px 20px;
 	cursor: pointer;
 	display: block;
-	background-color: white;
+	background-color: rgba(255, 255, 255, 0.926);
 	color: rgb(193, 6, 6);
 	border: none;
 	font-size: 1em;
 	border-radius: 8px;
 	margin-bottom: 15px;
+	font-weight: 500;
+	letter-spacing: 0.2px;
+}
+
+#next-button,
+#restart-button,
+#start-button {
+	background-color: rgba(23, 23, 23, 0.71);
+	color: white;
+	border: none;
+	font-weight: 600;
 }
 
 #next-button,
 #restart-button {
 	margin-top: 55px;
-	background-color: white;
-	color: black;
-	border: none;
-	font-weight: 4;
+}
+
+#start-button {
+	margin-top: 30px;
 }

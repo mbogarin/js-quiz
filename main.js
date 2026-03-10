@@ -1,5 +1,5 @@
 // ARRAY - QUESTIONS / OPTONS / ANSWERS
-// 4 options: i = 0-3
+// (4 options: i = 0-3)
 const quizData = [
 	// #1
 	{
@@ -67,7 +67,7 @@ const quizData = [
 			"A pit stop rule",
 			"A restricted area where cars cannot be modified",
 			"An overtake activation zone",
-			"A safety car depoloyment",
+			"A safety car deployment",
 		],
 		answer: 1,
 	},
@@ -119,17 +119,19 @@ const messageText = document.getElementById("message");
 
 // FUNCTIONS / EVENT LISTENERS
 
-// // ! ADD A START QUIZ FUNCTION
-// // = function #1 - START QUIZ
-// function startQuiz() {
-// 	startContainer.style.display = "none";
-// 	quizContainer.classList.remove("hidden");
-// 	quizContainer.style.display = "block";
+// ! ADD A START QUIZ FUNCTION
+// = function #1 - START QUIZ
+function startQuiz() {
+	startContainer.style.display = "none";
 
-// 	loadQuestion();
+	quizContainer.classList.remove("hidden");
+	// quizContainer.style.display = "block";
 
-// // EVENT LISTENER - START button
-// startButton.addEventListener("click", startQuiz);
+	loadQuestion();
+}
+
+// EVENT LISTENER - START button
+startButton.addEventListener("click", startQuiz);
 
 // = Function #1 - LOAD QUESTIONS
 function loadQuestion() {
@@ -216,6 +218,8 @@ function showScore() {
 	messageText.textContent = message;
 }
 
+// todo: allow users to see answers at the end.
+
 // = Function #4 - RESTART QUIZ
 function restartQuiz() {
 	currentQuestionIndex = 0;
@@ -231,7 +235,7 @@ function restartQuiz() {
 
 	nextButton.disabled = true;
 
-	quizData.sort(() => Math.random() - 0.5);
+	quizData.sort(() => Math.random() - 0.5); // randomizes questions when quiz is restarted
 
 	loadQuestion(); // loads question
 }
@@ -239,4 +243,4 @@ function restartQuiz() {
 // EVENT LISTENER - RESTART button
 restartButton.addEventListener("click", restartQuiz);
 
-loadQuestion();
+// loadQuestion(); // loads first question
