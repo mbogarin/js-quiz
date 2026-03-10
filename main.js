@@ -75,7 +75,7 @@ const quizData = [
 	// #8
 	{
 		question:
-			"Where was the very first F1 World championship race held back in 1950?",
+			"Where was the very first F1 World Championship race held in 1950?",
 		option: [
 			"Gills Villenueve, Montreal",
 			"Zandvoort, Netherlands",
@@ -94,6 +94,10 @@ let currentQuestionIndex = 0;
 let score = 0;
 
 // SELECTING ELEMENTS BY ID
+// = start container
+const startContainer = document.getElementById("start-container");
+const startButton = document.getElementById("start-button");
+
 // = progress
 const progressContainer = document.getElementById("progress");
 
@@ -101,7 +105,7 @@ const progressContainer = document.getElementById("progress");
 const quizContainer = document.getElementById("quiz-container");
 const scoreContainer = document.getElementById("score-container");
 
-// = quiz containers
+// = quiz container
 const questionContainer = document.getElementById("question-container");
 const optionsContainer = document.getElementById("options-container");
 
@@ -109,15 +113,29 @@ const optionsContainer = document.getElementById("options-container");
 const nextButton = document.getElementById("next-button");
 const restartButton = document.getElementById("restart-button");
 
-// = score
+// = score / message
 const scoreText = document.getElementById("score");
+const messageText = document.getElementById("message");
 
-// FUNCTIONS
-// = Function #1 - load questions
+// FUNCTIONS / EVENT LISTENERS
+
+// // ! ADD A START QUIZ FUNCTION
+// // = function #1 - START QUIZ
+// function startQuiz() {
+// 	startContainer.style.display = "none";
+// 	quizContainer.classList.remove("hidden");
+// 	quizContainer.style.display = "block";
+
+// 	loadQuestion();
+
+// // EVENT LISTENER - START button
+// startButton.addEventListener("click", startQuiz);
+
+// = Function #1 - LOAD QUESTIONS
 function loadQuestion() {
 	optionsContainer.innerHTML = ""; // clear options
 
-	nextButton.disabled = true;
+	nextButton.disabled = true; // disables next button until option is selected
 
 	const currentQuestion = quizData[currentQuestionIndex]; // define current question
 
@@ -134,7 +152,7 @@ function loadQuestion() {
 	});
 }
 
-// = Function #2 - Select option
+// = Function #2 - SELECT OPTIONS
 function selectOption(selectedIndex) {
 	const currentQuestion = quizData[currentQuestionIndex]; // define current question
 	const buttons = optionsContainer.querySelectorAll("button"); // create selected button and gets all selected options
@@ -155,7 +173,7 @@ function selectOption(selectedIndex) {
 	nextButton.disabled = false;
 }
 
-// EVENT LISTENER - Next button
+// EVENT LISTENER - NEXT button
 nextButton.addEventListener("click", () => {
 	// currentQuestionIndex++; // triggers next question
 
@@ -170,7 +188,7 @@ nextButton.addEventListener("click", () => {
 	}
 });
 
-// Function #3. QUIZ ENDS -> Show score -> Message displayed
+// = Function #3. QUIZ ENDS -> Show score -> Message displayed
 function showScore() {
 	quizContainer.classList.add("hidden");
 	scoreContainer.classList.remove("hidden");
@@ -190,14 +208,15 @@ function showScore() {
 		message = "Casual F1 Viewer 🏎️";
 		// less than 50% score
 	} else {
-		message = "You might be a Ferrari strategist 😅";
+		message = "You might be a Ferrari strategist 😬";
 	}
 
 	// show score + display message
-	scoreText.textContent = `You scored ${score} out of ${quizData.length}. ${message}`;
+	scoreText.textContent = `You scored ${score} out of ${quizData.length}.`;
+	messageText.textContent = message;
 }
 
-// Function #4: restart quiz
+// = Function #4 - RESTART QUIZ
 function restartQuiz() {
 	currentQuestionIndex = 0;
 	score = 0;
@@ -217,7 +236,7 @@ function restartQuiz() {
 	loadQuestion(); // loads question
 }
 
-// EVENT LISTENER #3 - restart button
+// EVENT LISTENER - RESTART button
 restartButton.addEventListener("click", restartQuiz);
 
 loadQuestion();
