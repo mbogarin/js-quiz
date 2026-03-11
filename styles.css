@@ -32,7 +32,7 @@ body::before {
 =========================== */
 
 .hidden {
-	/* display: none; */
+	display: none;
 }
 
 .correct {

@@ -32,57 +32,57 @@ const quizData = [
 		answer: 2,
 	},
 
-	// // #4
-	// {
-	// 	question:
-	// 		"Which tire compound is typically the fastest in a race weekend?",
-	// 	option: ["Hard", "Medium", "Soft", "Intermediate"],
-	// 	answer: 2,
-	// },
+	// #4
+	{
+		question:
+			"Which tire compound is typically the fastest in a race weekend?",
+		option: ["Hard", "Medium", "Soft", "Intermediate"],
+		answer: 2,
+	},
 
-	// // #5
-	// {
-	// 	question: "What does a yellow flag mean during a race?",
-	// 	option: [
-	// 		"Race stopped",
-	// 		"Caution, slow down",
-	// 		"Pit immediately",
-	// 		"Fastest lap",
-	// 	],
-	// 	answer: 1,
-	// },
+	// #5
+	{
+		question: "What does a yellow flag mean during a race?",
+		option: [
+			"Race stopped",
+			"Caution, slow down",
+			"Pit immediately",
+			"Fastest lap",
+		],
+		answer: 1,
+	},
 
-	// // #6
-	// {
-	// 	question: "Which device protects the driver's head in modern F1 cars?",
-	// 	option: ["Halo", "Shield", "Helmet Bar", "Safety Ring"],
-	// 	answer: 0,
-	// },
+	// #6
+	{
+		question: "Which device protects the driver's head in modern F1 cars?",
+		option: ["Halo", "Shield", "Helmet Bar", "Safety Ring"],
+		answer: 0,
+	},
 
-	// // #7
-	// {
-	// 	question: "What does parc fermé refer to?",
-	// 	option: [
-	// 		"A pit stop rule",
-	// 		"A restricted area where cars cannot be modified",
-	// 		"An overtake activation zone",
-	// 		"A safety car deployment",
-	// 	],
-	// 	answer: 1,
-	// },
+	// #7
+	{
+		question: "What does parc fermé refer to?",
+		option: [
+			"A pit stop rule",
+			"A restricted area where cars cannot be modified",
+			"An overtake activation zone",
+			"A safety car deployment",
+		],
+		answer: 1,
+	},
 
-	// // #8
-	// {
-	// 	question:
-	// 		"Where was the very first F1 World Championship race held in 1950?",
-	// 	option: [
-	// 		"Gills Villenueve, Montreal",
-	// 		"Zandvoort, Netherlands",
-	// 		"Monza, Italy",
-	// 		"Silverstone, United Kingdom",
-	// 	],
-	// 	answer: 3,
-	// },
+	// #8
+	{
+		question:
+			"Where was the very first F1 World Championship race held in 1950?",
+		option: [
+			"Gills Villenueve, Montreal",
+			"Zandvoort, Netherlands",
+			"Monza, Italy",
+			"Silverstone, United Kingdom",
+		],
+		answer: 3,
+	},
 ];
 
 // RANDOMIZE QUESTIONS:
@@ -91,8 +91,6 @@ quizData.sort(() => Math.random() - 0.5);
 // QUESTION / SCORE INDEX - starts at 0
 let currentQuestionIndex = 0;
 let score = 0;
-
-// ! review
 let userAnswers = []; // empty array for user answers
 
 // SELECTING ELEMENTS BY ID
