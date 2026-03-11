@@ -10,8 +10,13 @@
 }
 
 body {
-	font-family: "roboto";
-	background-color: lightgray;
+	font-family: "roboto", arial;
+	background-color: #f4f6f8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
 	text-align: center;
 	color: white;
 }
@@ -44,8 +49,16 @@ body::before {
 
 .incorrect {
 	background-color: rgb(243, 43, 43);
-	color: rgb(34, 34, 34);
+	color: rgb(48, 48, 48);
 	font-style: italic;
+}
+
+.correct:hover {
+	color: rgb(74, 191, 74);
+}
+
+.incorrect:hover {
+	color: #e10600;
 }
 
 /* "quiz" */
@@ -66,11 +79,10 @@ h1 span {
 #review-container {
 	background-color: rgba(42, 42, 42, 0.954);
 	width: 50%;
-	margin: 80px auto;
 	padding: 30px;
-	border: none;
-	border-radius: 10px;
-	box-shadow: 0 4px 10px rgba(255, 255, 255, 0.5);
+	border-radius: 12px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+	width: 450px;
 }
 
 #quiz-container h1,
@@ -87,11 +99,20 @@ h1 span {
 	letter-spacing: 0.5px;
 }
 
+#options-container {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-top: 20px;
+}
+
 /* <==== QUESTIONS ====> */
 #progress {
-	margin-top: 10px;
-	margin-bottom: 35px;
+	margin-top: 12px;
+	margin-bottom: 30px;
 	font-family: monospace;
+	font-weight: bold;
+	color: #bbbbbb;
 }
 
 #question-container {
@@ -176,17 +197,22 @@ h1 span {
 =========================== */
 button {
 	margin: 10px auto;
-	padding: 9px 20px;
+	padding: 10px 16px;
 	cursor: pointer;
 	display: block;
 	background-color: rgba(255, 255, 255, 0.926);
-	color: rgb(193, 6, 6);
+	color: #e10600;
 	border: none;
 	font-size: 1em;
-	border-radius: 8px;
-	margin-bottom: 15px;
-	font-weight: 500;
+	border-radius: 6px;
+	font-weight: 600;
 	letter-spacing: 0.2px;
+}
+
+#restart-review-button:hover {
+	background-color: rgba(117, 180, 247, 0.71);
+	color: white;
+	font-weight: 600;
 }
 
 #next-button,
@@ -197,6 +223,7 @@ button {
 	color: white;
 	border: none;
 	font-weight: 600;
+	transition: 0.2s ease;
 }
 
 #next-button,
@@ -213,4 +240,31 @@ button {
 	font-weight: 500;
 	color: rgb(11, 101, 198);
 	margin-top: 20px;
+}
+
+#review-button:hover {
+	background-color: rgba(117, 180, 247, 0.71);
+	color: white;
+	font-weight: 600;
+	transform: translateY(-1px);
+}
+
+#start-container button:hover,
+#quiz-container button:hover,
+#score-container button:hover {
+	transform: translateY(-2px);
+}
+
+#options-container button {
+	padding: 14px 18px;
+	border-radius: 8px;
+	border: 1px solid #eeeeee;
+	cursor: pointer;
+	font-size: 16px;
+	transition: all 0.2s ease;
+}
+
+#options-container button:hover {
+	background-color: white;
+	transform: translateY(-1px);
 }
