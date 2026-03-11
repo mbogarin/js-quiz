@@ -32,18 +32,27 @@ body::before {
 =========================== */
 
 .hidden {
-	display: none;
+	/* display: none; */
 }
 
 .correct {
 	background-color: rgb(74, 191, 74);
 	font-weight: 600;
 	color: white;
+	box-shadow: 0 1px 4px rgba(218, 218, 218, 0.626);
 }
 
 .incorrect {
 	background-color: rgb(243, 43, 43);
-	color: black;
+	color: rgb(34, 34, 34);
+	font-style: italic;
+}
+
+/* "quiz" */
+h1 span {
+	font-size: 0.8em;
+	font-family: arial;
+	font-weight: bold;
 	font-style: italic;
 }
 
@@ -53,8 +62,9 @@ body::before {
 
 #quiz-container,
 #score-container,
-#start-container {
-	background-color: rgba(137, 8, 8, 0.841);
+#start-container,
+#review-container {
+	background-color: rgba(42, 42, 42, 0.954);
 	width: 50%;
 	margin: 80px auto;
 	padding: 30px;
@@ -64,17 +74,11 @@ body::before {
 }
 
 #quiz-container h1,
-#start-container h1 {
+#start-container h1,
+#review-container h2 {
 	font-size: 2.5em;
 	font-family: "racing sans one";
 }
-
-span {
-	font-size: 0.8em;
-	font-family: arial;
-	font-weight: bold;
-	font-style: italic;
-} /* "quiz" */
 
 #start-container p {
 	margin-top: 30px;
@@ -83,7 +87,7 @@ span {
 	letter-spacing: 0.5px;
 }
 
-/* <==== QUESTION ====> */
+/* <==== QUESTIONS ====> */
 #progress {
 	margin-top: 10px;
 	margin-bottom: 35px;
@@ -117,12 +121,62 @@ span {
 	font-size: 1.4em;
 }
 
+/* <==== REVIEW ====> */
+#review-content {
+	margin-top: 20px;
+}
+#review-content p {
+	padding: 15px;
+	font-family: "roboto";
+	font-size: 1em;
+	letter-spacing: 0.2px;
+}
+
+/* question number */
+#review-content h3 {
+	padding-bottom: 8px;
+	padding-top: 20px;
+	font-family: monospace;
+	font-size: 1.4em;
+}
+
+/* question */
+#review-content h4 {
+	font-size: 1.1em;
+	font-weight: bold;
+	letter-spacing: 0.2px;
+	margin-bottom: 5px;
+}
+
+.correct-answer,
+.correct-review-answer,
+.incorrect-answer {
+	border-radius: 8px;
+	border: none;
+	margin: 0 40px;
+	color: white;
+}
+
+.correct-answer,
+.correct-review-answer {
+	background-color: rgb(74, 191, 74);
+	font-weight: 600;
+}
+
+.incorrect-answer {
+	background-color: rgb(243, 43, 43);
+}
+
+.correct-review-answer {
+	margin-bottom: 50px;
+}
+
 /* ==========================
     BUTTONS 
 =========================== */
 button {
 	margin: 10px auto;
-	padding: 8px 20px;
+	padding: 9px 20px;
 	cursor: pointer;
 	display: block;
 	background-color: rgba(255, 255, 255, 0.926);
@@ -137,18 +191,26 @@ button {
 
 #next-button,
 #restart-button,
-#start-button {
-	background-color: rgba(23, 23, 23, 0.71);
+#start-button,
+#restart-review-button {
+	background-color: rgba(117, 180, 247, 0.71);
 	color: white;
 	border: none;
 	font-weight: 600;
 }
 
 #next-button,
-#restart-button {
+#restart-button,
+#restart-review-button {
 	margin-top: 55px;
 }
 
 #start-button {
 	margin-top: 30px;
+}
+
+#review-button {
+	font-weight: 500;
+	color: rgb(11, 101, 198);
+	margin-top: 20px;
 }

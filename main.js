@@ -1,5 +1,4 @@
 // ARRAY - QUESTIONS / OPTONS / ANSWERS
-// (4 options: i = 0-3)
 const quizData = [
 	// #1
 	{
@@ -33,65 +32,68 @@ const quizData = [
 		answer: 2,
 	},
 
-	// #4
-	{
-		question:
-			"Which tire compound is typically the fastest in a race weekend?",
-		option: ["Hard", "Medium", "Soft", "Intermediate"],
-		answer: 2,
-	},
+	// // #4
+	// {
+	// 	question:
+	// 		"Which tire compound is typically the fastest in a race weekend?",
+	// 	option: ["Hard", "Medium", "Soft", "Intermediate"],
+	// 	answer: 2,
+	// },
 
-	// #5
-	{
-		question: "What does a yellow flag mean during a race?",
-		option: [
-			"Race stopped",
-			"Caution, slow down",
-			"Pit immediately",
-			"Fastest lap",
-		],
-		answer: 1,
-	},
+	// // #5
+	// {
+	// 	question: "What does a yellow flag mean during a race?",
+	// 	option: [
+	// 		"Race stopped",
+	// 		"Caution, slow down",
+	// 		"Pit immediately",
+	// 		"Fastest lap",
+	// 	],
+	// 	answer: 1,
+	// },
 
-	// #6
-	{
-		question: "Which device protects the driver's head in modern F1 cars?",
-		option: ["Halo", "Shield", "Helmet Bar", "Safety Ring"],
-		answer: 0,
-	},
+	// // #6
+	// {
+	// 	question: "Which device protects the driver's head in modern F1 cars?",
+	// 	option: ["Halo", "Shield", "Helmet Bar", "Safety Ring"],
+	// 	answer: 0,
+	// },
 
-	// #7
-	{
-		question: "What does parc fermé refer to?",
-		option: [
-			"A pit stop rule",
-			"A restricted area where cars cannot be modified",
-			"An overtake activation zone",
-			"A safety car deployment",
-		],
-		answer: 1,
-	},
+	// // #7
+	// {
+	// 	question: "What does parc fermé refer to?",
+	// 	option: [
+	// 		"A pit stop rule",
+	// 		"A restricted area where cars cannot be modified",
+	// 		"An overtake activation zone",
+	// 		"A safety car deployment",
+	// 	],
+	// 	answer: 1,
+	// },
 
-	// #8
-	{
-		question:
-			"Where was the very first F1 World Championship race held in 1950?",
-		option: [
-			"Gills Villenueve, Montreal",
-			"Zandvoort, Netherlands",
-			"Monza, Italy",
-			"Silverstone, United Kingdom",
-		],
-		answer: 3,
-	},
+	// // #8
+	// {
+	// 	question:
+	// 		"Where was the very first F1 World Championship race held in 1950?",
+	// 	option: [
+	// 		"Gills Villenueve, Montreal",
+	// 		"Zandvoort, Netherlands",
+	// 		"Monza, Italy",
+	// 		"Silverstone, United Kingdom",
+	// 	],
+	// 	answer: 3,
+	// },
 ];
 
 // RANDOMIZE QUESTIONS:
 quizData.sort(() => Math.random() - 0.5);
 
-// QUESTION / SCORE INDEX:
+// QUESTION / SCORE INDEX - starts at 0
 let currentQuestionIndex = 0;
 let score = 0;
+
+// ! review
+let userAnswers = []; // empty array for user answers
 
 // SELECTING ELEMENTS BY ID
 // = start container
@@ -109,7 +111,7 @@ const scoreContainer = document.getElementById("score-container");
 const questionContainer = document.getElementById("question-container");
 const optionsContainer = document.getElementById("options-container");
 
-// = buttons
+// = next/restart buttons
 const nextButton = document.getElementById("next-button");
 const restartButton = document.getElementById("restart-button");
 
@@ -117,21 +119,23 @@ const restartButton = document.getElementById("restart-button");
 const scoreText = document.getElementById("score");
 const messageText = document.getElementById("message");
 
-// FUNCTIONS / EVENT LISTENERS
+// = review container
+const reviewContainer = document.getElementById("review-container");
+const reviewContent = document.getElementById("review-content");
+const reviewButton = document.getElementById("review-button");
+const restartReviewButton = document.getElementById("restart-review-button");
 
-// ! ADD A START QUIZ FUNCTION
+// FUNCTIONS / EVENT LISTENERS
 // = function #1 - START QUIZ
 function startQuiz() {
-	startContainer.style.display = "none";
-
-	quizContainer.classList.remove("hidden");
-	// quizContainer.style.display = "block";
+	startContainer.style.display = "none"; // hides start container
+	quizContainer.classList.remove("hidden"); // shows quiz container
 
 	loadQuestion();
 }
 
 // EVENT LISTENER - START button
-startButton.addEventListener("click", startQuiz);
+startButton.addEventListener("click", startQuiz); // triggers start of quiz
 
 // = Function #1 - LOAD QUESTIONS
 function loadQuestion() {
@@ -144,41 +148,40 @@ function loadQuestion() {
 	progressContainer.textContent = `Question ${currentQuestionIndex + 1} of ${quizData.length}`; // adds question #
 	questionContainer.textContent = currentQuestion.question; // add question
 
-	// loop - for each option, create a button
+	// loop - for each option, create a button & add text
 	currentQuestion.option.forEach((option, index) => {
-		const button = document.createElement("button"); // create option buttons
-		button.textContent = option; // add option text to buttons
-		button.addEventListener("click", () => selectOption(index)); // trigger options
+		const optionButton = document.createElement("button"); // create option button
+		optionButton.textContent = option; // add option text to buttons
+		optionButton.addEventListener("click", () => selectOption(index)); // triggers option buttons
 
-		optionsContainer.appendChild(button); // append option button to options container
+		optionsContainer.appendChild(optionButton); // append option button to options container
 	});
 }
 
 // = Function #2 - SELECT OPTIONS
 function selectOption(selectedIndex) {
-	const currentQuestion = quizData[currentQuestionIndex]; // define current question
-	const buttons = optionsContainer.querySelectorAll("button"); // create selected button and gets all selected options
+	const currentQuestion = quizData[currentQuestionIndex]; // defines current question
+	userAnswers[currentQuestionIndex] = selectedIndex; // saves user answers (review later)
+	const selectedButtons = optionsContainer.querySelectorAll("button"); // gets all selected options & creates selected buttons
 
 	// loop - for each selection option...
-	buttons.forEach((button) => (button.disabled = true));
-	// if - selected option is the answer to the current question, then it's correct
+	selectedButtons.forEach((optionButton) => (optionButton.disabled = true)); //
+	// if - selected option = answer to the current question, then it's correct
 	if (selectedIndex === currentQuestion.answer) {
-		buttons[selectedIndex].classList.add("correct"); // add styling class to correct selected option
+		selectedButtons[selectedIndex].classList.add("correct"); // add styling class to correct selected option
 		score++; // add to score
 
 		// else - if selected option is NOT the answer to the current question, then it's incorrect
 	} else {
-		buttons[selectedIndex].classList.add("incorrect"); // add styling class to incorrect selected option
-		buttons[currentQuestion.answer].classList.add("correct"); // add styling to correct if selected option is incorrect
+		selectedButtons[selectedIndex].classList.add("incorrect"); // add styling class to incorrect selected option
+		selectedButtons[currentQuestion.answer].classList.add("correct"); // add styling to correct if selected option is incorrect
 	}
 
-	nextButton.disabled = false;
+	nextButton.disabled = false; // enables next button (once option is selected)
 }
 
 // EVENT LISTENER - NEXT button
 nextButton.addEventListener("click", () => {
-	// currentQuestionIndex++; // triggers next question
-
 	// if - current question is the last question, show score
 	if (currentQuestionIndex === quizData.length - 1) {
 		showScore();
@@ -192,21 +195,18 @@ nextButton.addEventListener("click", () => {
 
 // = Function #3. QUIZ ENDS -> Show score -> Message displayed
 function showScore() {
-	quizContainer.classList.add("hidden");
-	scoreContainer.classList.remove("hidden");
-
-	quizContainer.style.display = "none";
-	scoreContainer.style.display = "block";
+	quizContainer.classList.add("hidden"); // hides quiz container
+	scoreContainer.classList.remove("hidden"); // shows score container
 
 	let message;
 	// if: 100% score
 	if (score === quizData.length) {
 		message = "F1 Master 🏆";
-		// else if: 80-90% score
-	} else if (score >= quizData.length * 0.8) {
+		// else if: 75-90% score
+	} else if (score >= quizData.length * 0.75) {
 		message = "True F1 Fan 🏁";
-		// else if: 60-70% score
-	} else if (score >= quizData.length * 0.6) {
+		// else if: 50-74% score
+	} else if (score >= quizData.length * 0.5) {
 		message = "Casual F1 Viewer 🏎️";
 		// less than 50% score
 	} else {
@@ -218,29 +218,63 @@ function showScore() {
 	messageText.textContent = message;
 }
 
-// todo: allow users to see answers at the end.
+// = Function #4 - REVIEW QUIZ
+function reviewQuiz() {
+	scoreContainer.classList.add("hidden"); // hides score container
+	reviewContainer.classList.remove("hidden"); // shows review container
 
-// = Function #4 - RESTART QUIZ
+	reviewContent.innerHTML = ""; // clears contents of review container
+
+	quizData.forEach((question, index) => {
+		const userAnswerIndex = userAnswers[index];
+		const correctAnswerIndex = question.answer;
+
+		const reviewAnswer = document.createElement("div");
+
+		// Review - Question / Answer / Correct answer (if wrong)
+		const isCorrect = userAnswerIndex === correctAnswerIndex; // shows if correct/incorrect
+
+		reviewAnswer.innerHTML = `
+		<h3>Question ${index + 1}</h3>
+		<h4>${question.question}</h4>
+		</br>
+
+		<p class="${isCorrect ? "correct-answer" : "incorrect-answer"}">Your Answer: ${question.option[userAnswerIndex]}</p>
+		</br>
+		
+		<p class="correct-review-answer">Correct Answer: ${question.option[correctAnswerIndex]}</p>
+		`;
+
+		reviewContent.appendChild(reviewAnswer); // appends review answers to review content
+	});
+}
+
+// EVENT LISTENER - REVIEW button
+reviewButton.addEventListener("click", reviewQuiz);
+
+// = Function #5 - RESTART QUIZ
 function restartQuiz() {
+	// resets score & current question index
 	currentQuestionIndex = 0;
 	score = 0;
 
-	scoreContainer.classList.add("hidden");
-	scoreContainer.style.display = "none";
+	reviewContainer.classList.add("hidden"); // hides review container
+	reviewContainer.innerHTML = ""; // clears review container
 
-	quizContainer.classList.remove("hidden");
-	quizContainer.style.display = "block";
+	scoreContainer.classList.add("hidden"); // hides score container
+	quizContainer.classList.remove("hidden"); // shows quiz container
 
-	optionsContainer.innerHTML = ""; // clears options
+	optionsContainer.innerHTML = ""; // clears options container
 
-	nextButton.disabled = true;
+	nextButton.disabled = true; // disables next button until option is selected
 
 	quizData.sort(() => Math.random() - 0.5); // randomizes questions when quiz is restarted
 
-	loadQuestion(); // loads question
+	loadQuestion(); // loads first question
 }
 
 // EVENT LISTENER - RESTART button
-restartButton.addEventListener("click", restartQuiz);
+restartButton.addEventListener("click", restartQuiz); // triggers restart quiz
 
-// loadQuestion(); // loads first question
+// EVENT LISTENER - RESTART REVIEW button
+restartReviewButton.addEventListener("click", restartQuiz);
