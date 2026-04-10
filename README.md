@@ -1,4 +1,4 @@
-# js-quiz_magali
+# js-quiz
 
 A simple interactive Formula 1 trivia quiz built with HTML, CSS, and vanilla JavaScript.
 This project tests users on their knowledge of Formula 1 while demonstrating core JavaScript concepts like DOM manipulation, event handling, and dynamic UI updates.
